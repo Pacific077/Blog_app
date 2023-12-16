@@ -1,0 +1,38 @@
+<nav>
+  <div>
+    <img src="/images/logo.png" alt="logo" />
+  </div>
+
+  <ul>
+    <%if(Userauth){%>
+      <li>
+        <a href="/">Home</a>
+      </li>
+      <li>
+        <a href="/api/v1/user/profile-page">Profile</a>
+      </li>
+      <li>
+        <a href="#">Posts</a>
+      </li>
+      <li>
+        <a href="#" class="create-post-btn">New Post</a>
+      </li>
+      <li>
+        <a href="/api/v1/user/logout" class="create-post-btn">Logout</a>
+      </li>
+      <%}else{%>
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="#">Posts</a>
+        </li>
+        <li>
+          <a href="/api/v1/user/login">Login</a>
+        </li>
+        <li>
+          <a href="/api/v1/user/register">Register</a>
+        </li>
+      <%}%>
+  </ul>
+</nav>
