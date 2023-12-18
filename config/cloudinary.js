@@ -17,7 +17,10 @@ const storage = new CloudinaryStorage({
     cloudinary,
     allowedFormats:['jpg','jpeg','png'],
     params:{
-        folder:'blog_app'
+        folder:'blog_app',
+        transformation: [
+            { width: 250, height: 250, crop: 'fill' } 
+          ]
     }
 })
 export default storage

@@ -7,8 +7,13 @@ const CreateComment = async (req, res, next) => {
   const { message } = req.body;
 
   try {
-    //find the post
     const post = await Post.findById(req.params.id);
+    if(!message){
+      return res.render('posts/postDetails.ejs',{
+        errorcmnt:"Comment cant be empty",post
+      })
+    }
+    //find the post
     // create the comment
     const comment = await Comment.create({
       user: req.session.Userauth,
@@ -23,10 +28,7 @@ const CreateComment = async (req, res, next) => {
 
     await post.save({ validateBeforeSave: false });
     await user.save({ validateBeforeSave: false });
-    res.json({
-      status: "success",
-      data: comment,
-    });
+    return res.redirect("/api/v1/user/profile-page")
   } catch (er) {
     return next(appErr(er.message));
   }

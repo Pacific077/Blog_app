@@ -108,3 +108,73 @@ body {
   cursor: pointer;
   transition: 0.3s ease;
 }
+.Editbtn{
+  height: 4vh;
+  width: 7vh;
+  background-color: green;
+  color: green;
+  color: white;
+}
+.Editbtn:hover{
+  cursor: pointer;
+  background-color: rgb(5, 230, 5);
+  color: black;
+  transition: 0.3s ease;
+  transform:  scale(1.05);
+}
+.updatepassbtn{
+  height: 4.5vh;
+  width: 12vh;
+  border-radius: 10px;
+  background: green;
+  color: white;
+  box-shadow: 4px 4px 4px grey;
+  font-weight: 700;
+  
+}
+.updatepassbtn:hover{
+  background-color: rgb(0, 255, 0);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.deletepostbtn{
+  height: 4.5vh;
+  width: 12vh;
+  border-radius: 10px;
+  background: green;
+  color: white;
+  box-shadow: 4px 4px 4px grey;
+  font-weight: 700;
+  /* margin-left: 8vh; */
+  margin-bottom: 4vh;
+}
+.deletepostbtn:hover{
+  background-color: rgb(0, 255, 0);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.deltepostform{
+  display: inline;
+}
+.deleditform{
+  margin-top: 10px;
+  display: flex;
+  justify-self: flex-end;
+  gap: 3vh;
+}
+.editpostbtn{
+  height: 4.5vh;
+  width: 12vh;
+  border-radius: 10px;
+  background: red;
+  color: white;
+  box-shadow: 4px 4px 4px grey;
+  font-weight: 700;
+  /* margin-left: 8vh; */
+  margin-bottom: 4vh;
+}
+.editpostbtn:hover{
+  background-color: rgb(135, 0, 0);
+  cursor: pointer;
+  transition: 0.3s ease;
+}

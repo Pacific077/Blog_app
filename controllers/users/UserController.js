@@ -149,17 +149,19 @@ const CoverPicUpload = async (req, res) => {
 
 const UpdatePassword = async (req, res, next) => {
   const { password } = req.body;
+  if(!password){
+    return res.render('users/updatePassword',{
+      error:"please enter the password"
+    })
+  }
   try {
     if (password) {
       const salt = await bcrypt.genSalt(10);
       const hashedPass = await bcrypt.hash(password, salt);
-      await User.findByIdAndUpdate(req.params.id, {
+      await User.findByIdAndUpdate(req.session.Userauth, {
         password: hashedPass,
       });
-      res.json({
-        status: "success",
-        user: "user pasword updated successfully",
-      });
+      return res.redirect("/api/v1/user/profile-page")
     }
   } catch (Er) {
     return res.json(next(appErr(Er.message)));
@@ -168,23 +170,29 @@ const UpdatePassword = async (req, res, next) => {
 
 const UpdateProfile = async (req, res, next) => {
   const { fullname, email, password } = req.body;
-
+  if(!email||!fullname||!password){
+    return res.render('users/Updateuser.ejs',{
+      error:"All fields required"
+    })
+  }
   try {
     if (email) {
       const emailTaken = await User.findOne({ email });
       if (emailTaken) {
-        return next(appErr("Email already taken", 400));
+        return res.render('users/Updateuser.ejs',{
+          error:"Email already exists"
+        })
       }
     }
-    const user = await User.findByIdAndUpdate(req.params.id, {
+     await User.findByIdAndUpdate(req.session.Userauth, {
       fullname,
+      email
     });
-    res.json({
-      status: "success",
-      user: user,
-    });
+    return res.redirect('/api/v1/user/profile-page')
   } catch (Er) {
-    return res.json(next(appErr(Er.message)));
+    return res.render('users/Updateuser.ejs',{
+      error:Er.message
+    })
   }
 };
 

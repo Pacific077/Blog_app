@@ -11,7 +11,8 @@ import UserRoutes from "./routes/users/UserRoutes.js";
 import PostRoutes from "./routes/posts/PostRoutes.js";
 import CommentRoutes from "./routes/comments/CommentRoutes.js";
 import GlobalErHandler from "./middlewares/globaErrhandler.js";
-
+import truncate from "./utils/helpers.js";
+import Post from "./models/posts/Post.js";
 const app = express();
 
 dotenv.config();
@@ -22,7 +23,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 //config ejs
 app.set("view engine", "ejs");
 //serve static files
-console.log("dir", __dirname);
+
 app.use(express.static(__dirname + "/public"));
 app.use(express.json()); //pass incomig data in json
 app.use(express.urlencoded({ extended: true })); //pass form data
@@ -49,10 +50,15 @@ app.use((req, res, next) => {
   }
   next();
 });
+app.locals.truncate = truncate;
 
 //render home
-app.get("/", (req, res) => {
-  res.render("index.ejs");
+app.get("/", async (req, res) => {
+  const post = await Post.find().populate('user');
+  // console.log("post",post);
+  res.render("index.ejs",{
+    post
+  });
 });
 //routes
 app.use("/api/v1/user", UserRoutes);

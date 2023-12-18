@@ -1,6 +1,6 @@
 
 import mongoose, { mongo } from "mongoose";
-
+ 
 const PostSchema = new mongoose.Schema(
   {
     title: {

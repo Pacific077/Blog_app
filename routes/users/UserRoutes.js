@@ -43,7 +43,14 @@ UserRoutes.get('/upload-cover-pic',(req,res)=>{
   })
 })
 UserRoutes.get('/update-user',(req,res)=>{
-  res.render('users/UpdateUser.ejs')
+  res.render('users/UpdateUser.ejs',{
+    error:""
+  })
+})
+UserRoutes.get('/update-pass',(req,res)=>{
+  res.render('users/updatePassword.ejs',{
+    error:""
+  })
 })
 
 // reguster user
@@ -66,10 +73,10 @@ UserRoutes.put("/profile-photo-upload" , Protected ,upload.single('profile') ,Pr
 UserRoutes.put("/cover-photo-upload",Protected ,upload.single('profile') ,CoverPicUpload);
 
 // update password
-UserRoutes.put("/updatePassword/:id", UpdatePassword);
+UserRoutes.put("/updatePassword", UpdatePassword);
 
 // update user
-UserRoutes.put("/update/:id", UpdateProfile);
+UserRoutes.put("/update", UpdateProfile);
 
 // logout user
 UserRoutes.get("/logout", LogoutUser);
